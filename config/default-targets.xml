@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<target-sets>
+    <target-set name="default">
+        <target>
+            <name>lulu-digest</name>
+            <type>print</type>
+            <format>digest-11pt</format>
+            <print>www.lulu.com</print>
+            <cover>cover-digest.css</cover>
+        </target>
+        <target>
+            <name>lulu-a5</name>
+            <type>print</type>
+            <format>a5-11pt</format>
+            <print>www.lulu.com</print>
+            <cover>cover-a5-lulu.css</cover>
+        </target>
+        <target>
+            <name>epubli-a5</name>
+            <type>print</type>
+            <format>a5-11pt</format>
+            <print>www.epubli.de</print>
+            <cover>cover-a5.css</cover>
+        </target>
+        <target>
+            <name>epubli-taschenbuch</name>
+            <type>print</type>
+            <format>taschenbuch-11pt</format>
+            <print>www.epubli.de</print>
+            <cover>cover-taschenbuch.css</cover>
+        </target>
+        <target>
+            <name>epub</name>
+            <type>epub</type>
+            <format>epub</format>
+        </target>
+    </target-set>
+    <target-set name="default-big">
+        <target>
+            <name>epubli-a5</name>
+            <type>print</type>
+            <format>a5-11pt</format>
+            <print>www.epubli.de</print>
+            <cover>cover-a5.css</cover>
+        </target>
+        <target>
+            <name>epub</name>
+            <type>epub</type>
+            <format>epub</format>
+        </target>
+    </target-set>
+    <target-set name="epubli-book">
+    </target-set>
+    <target-set name="digital">
+        <target>
+            <name>epub</name>
+            <type>epub</type>
+            <format>epub</format>
+        </target>
+    </target-set>
+    <target-set name="small">
+        <target>
+            <name>lulu-digest</name>
+            <type>print</type>
+            <format>digest-11pt</format>
+            <print>www.lulu.com</print>
+            <cover>cover-digest.css</cover>
+        </target>
+        <target>
+            <name>epubli-taschenbuch</name>
+            <type>print</type>
+            <format>taschenbuch-11pt</format>
+            <print>www.epubli.de</print>
+            <cover>cover-taschenbuch.css</cover>
+        </target>
+        <target>
+            <name>epub</name>
+            <type>epub</type>
+            <format>epub</format>
+        </target>
+   </target-set>
+</target-sets> 

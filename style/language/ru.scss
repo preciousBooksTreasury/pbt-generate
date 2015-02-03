@@ -1,0 +1,21 @@
+html {
+    prince-hyphenate-patterns: url("hyph/hyph-ru.pat.txt");
+}
+@page {
+    prince-hyphenate-patterns: url("hyph/hyph-ru.pat.txt");
+}
+
+body { 
+    prince-hyphenate-patterns: url("hyph/hyph-ru.pat.txt");
+}
+#toc-title {
+    content: "Оглавление";
+}
+q {
+    &:before {
+        content: "«";
+    }
+    &:after {
+        content: "»";
+    }
+}

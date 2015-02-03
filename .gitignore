@@ -1,0 +1,7 @@
+*.css
+.sass-cache
+books/**
+results/private/**
+results/**
+cover/**
+pandoc-templates/**

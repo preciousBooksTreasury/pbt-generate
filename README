@@ -1,0 +1,10 @@
+README
+
+
+install
+
+you need 
+ + princexml
+ + http://code.google.com/p/wkhtmltopdf/
+ + sudo gem install simple-xml sass compass rubyzip
+ + sudo zypper in pandoc texlive

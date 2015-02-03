@@ -1,0 +1,29 @@
+---
+a4: 
+    width: 210mm
+    height: 297mm
+    top: 2cm
+    bottom: 2cm
+    left: 2.5cm
+    right: 2cm
+a5: 
+    width: 148mm
+    height: 210mm
+    top: 2cm
+    bottom: 2cm
+    left: 2.5cm
+    right: 2cm
+taschenbuch: 
+    width: 12.5cm
+    height: 19cm
+    top: 2cm
+    bottom: 2cm
+    left: 2.5cm
+    right: 2cm
+digest: 
+    width: 140mm
+    height: 216mm
+    top: 2cm
+    bottom: 2cm
+    left: 2.5cm
+    right: 2cm

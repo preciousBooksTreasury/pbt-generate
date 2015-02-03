@@ -1,0 +1,25 @@
+html {
+    prince-hyphenate-patterns: url("hyph/hyph-de-1996.pat.txt");
+
+}
+@page {
+    prince-hyphenate-patterns: url("hyph/hyph-de-1996.pat.txt");
+
+}
+
+body { 
+    prince-text-replace: "'" "\2019";
+    prince-hyphenate-patterns: url("hyph/hyph-de-1996.pat.txt");
+}
+#toc-title {
+    content: "Inhaltsverzeichnis";
+}
+q {
+    font-style:italic;
+    &:before {
+        content: "„";
+    }
+    &:after {
+        content: "”";
+    }
+}

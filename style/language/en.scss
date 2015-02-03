@@ -1,0 +1,24 @@
+html {
+      prince-hyphenate-patterns: url("hyph/hyph-en-gb.pat.txt");
+
+}
+@page {
+    prince-hyphenate-patterns: url("hyph/hyph-en-gb.pat.txt");
+
+}
+
+body { 
+    prince-text-replace: "'" "\2019";
+    prince-hyphenate-patterns: url("hyph/hyph-en-gb.pat.txt");
+}
+#toc-title {
+    content: "Index";
+}
+q {
+    &:before {
+        content: "&ldquo;";
+    }
+    &:after {
+        content: "&rdquo;";
+    }
+}

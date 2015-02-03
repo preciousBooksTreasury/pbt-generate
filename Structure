@@ -1,0 +1,19 @@
+Author:
+
+/[Author]/
+    photo.png
+    shortbio.html
+    
+Books:
+
+/[Author]/[Book Title]/[Language]/
+    data.html - the book itself
+    metadata.xml
+    data.css - special css; only if needed
+    
+/style/
+    print.css
+    epub.css
+    print-a5.css
+    
+/tools/

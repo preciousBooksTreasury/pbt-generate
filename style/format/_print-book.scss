@@ -1,0 +1,208 @@
+html {
+    text-align: justify;
+    line-height: 1.1;
+}
+@page {
+    size: $page-size;
+    font-size: $base-font-size;
+    margin-bottom: $margin-bottom;
+    margin-top: $margin-top;
+    margin-inside: $margin-inside;
+    margin-outside: $margin-outside;
+    
+}
+
+body { 
+    prince-text-replace: "'" "\2019";
+    margin: 0;
+    font-size: $base-font-size;
+}
+div.chapter{
+    page-break-after: $page-break-after-chapter;
+    word-wrap: break-word;
+    prince-hyphenate-lines: no-limit;
+    prince-hyphenate-after: 3;
+    hyphens: auto;
+    counter-reset: footnote;
+}
+body>div:last-of-type {
+    page-break-after: avoid;
+}
+.page-f {
+    page-break-after: always;
+}
+.p-no-break {
+    p {
+        page-break-inside: avoid;
+    }
+}
+.page-f > #title {
+     string-set: booktitle content()
+}
+.page-f > .info > span {
+    display: block;
+    font-size: 10px;
+    padding-top: 5px;
+}
+.page-f > .info {
+    margin-top: 200px;
+}
+#title {
+    text-align: center;
+    font-size: 32px;
+    display: block;
+}
+#author {
+    margin-top: 1em;
+    text-align: center;
+    font-size: 20px;
+    display: block;
+}
+h1,h2,h3,h4,h5,h6 {
+    text-align: center;
+}
+h1.caption {
+    font-size: $base-font-size*1.8;
+    display: block;
+    string-set: doctitle content();
+    hyphens: manual;
+}
+
+h2 {
+    font-size: $base-font-size*1.5;
+}
+@page:left {
+    @bottom-left {
+        content: counter(page);
+        font-size: 9pt;
+        
+    }
+    @top {
+        margin-top: 4pt;
+        content: string(booktitle);
+        font-size: $base-font-size * 0.85;
+        text-transform: uppercase;
+    }
+}
+@page:right {
+    @bottom-right {
+        content: counter(page);
+        font-size: 9pt;
+    }
+    @top {
+        margin-top: 4pt;
+        content: string(doctitle);
+        font-size: $base-font-size * 0.85;
+        font-style:italic;
+    }
+}
+@page:last {
+    @bottom-right {
+        content: "";
+    }
+    @bottom-left {
+        content: "";
+    }
+    @top {
+        content: "";
+    }
+}
+.poem , .sti {
+    font-style:italic;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    line-height: 1.5;
+    font-size: 0.8;
+    word-wrap: break-word;
+    text-wrap: suppress;
+}
+#toc-title {
+    font-size: 18px;
+    padding-bottom: 30px;
+}
+#navig a { 
+    color: #000000;
+    text-decoration: none;
+    font-size: 11px;
+    line-height: 1.5em;
+} 
+#navig a::after { 
+    content: leader("_") target-counter(attr(href), page); 
+} 
+
+.scripture {
+    display: block;
+    margin-left: 20px;
+    font-style:italic;
+    width: 80%;
+}
+.scripture-ref {
+    display: block;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+div.sig {
+    font-style:italic;
+    font-size: 0.8;
+    text-align: right;
+    margin-right: 3em;
+}
+
+.image img {
+    margin-top: 2em;
+    prince-image-resolution: 125dpi;
+    bleed:5mm;
+    cropmarks:4mm;
+    page-break-inside: avoid;
+    display: block;
+    margin: 0 auto;
+    
+    .img-caption {
+        font-style:italic;
+        margin-bottom: 0.5em;
+        margin-top: 0em;
+        margin-left: 1em;
+        font-size: 0.8;
+    }
+}
+span.scriptref {
+    font-style:italic;
+    &:before {
+        content: "(";
+    }
+    &:after {
+        content: ")";
+    }
+}
+q {
+    font-style:italic;
+    &:before {
+        content: " „";
+    }
+    &:after {
+        content: "” ";
+    }
+}
+
+@page {
+    @footnotes {
+        border-top: solid #272727 thin;
+        padding-top: 5pt;
+        padding-left: 7pt;
+    }
+}
+
+.fn {
+    float: footnote;
+    counter-increment: footnote;
+    font-style:italic;
+    font-size: $base-font-size * 0.95;
+}
+fn {
+    float: footnote;
+    counter-increment: footnote;
+    font-style:italic;
+    font-size: $base-font-size * 0.95;
+}
