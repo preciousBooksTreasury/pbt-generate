@@ -9,7 +9,9 @@
             papersize: digest
             fontsize: 11pt
             print: www.lulu.com
-            cover: cover-digest.css
+            cover: cover-digest-lulu.css
+            pandocTemplate: book.latex
+            fileType: pdf
         
         -
             name: lulu-a5
@@ -19,7 +21,8 @@
             fontsize: 11pt
             print: www.lulu.com
             cover: cover-a5-lulu.css
-        
+            pandocTemplate: book.latex
+            fileType: pdf
         -
             name: epubli-a5
             type: print
@@ -27,8 +30,9 @@
             fontsize: 11pt
             format: a5-11pt
             print: www.epubli.de
-            cover: cover-a5.css
-        
+            cover: cover-a5-epubli.css
+            pandocTemplate: book.latex
+            fileType: pdf
         -
             name: epubli-taschenbuch
             type: print
@@ -36,13 +40,15 @@
             print: www.epubli.de
             papersize: taschenbuch
             fontsize: 11pt
-            cover: cover-taschenbuch.css
-        
+            cover: cover-taschenbuch-epubli.css
+            pandocTemplate: book.latex
+            fileType: pdf
         -
             name: epub
             type: epub
             format: epub
-    
+            pandocTemplate: default.epub
+            fileType: epub
 -
     name: default-big
     targets: 
@@ -54,11 +60,14 @@
             fontsize: 11pt
             print: www.epubli.de
             cover: cover-a5.css
+            pandocTemplate: book.latex
+            fileType: pdf
         -
             name: epub
             type: epub
             format: epub
-    
+            pandocTemplate: default.epub
+            fileType: epub
 -
     name: digital
     targets:
@@ -66,7 +75,8 @@
             name: epub
             type: epub
             format: epub
-        
+            pandocTemplate: default.epub
+            fileType: epub
 -
     name: small
     targets:
@@ -78,6 +88,8 @@
             fontsize: 11pt
             print: www.lulu.com
             cover: cover-digest.css
+            pandocTemplate: book.latex
+            fileType: pdf
         
         -
             name: epubli-taschenbuch
@@ -87,19 +99,25 @@
             fontsize: 11pt
             print: www.epubli.de
             cover: cover-taschenbuch.css
+            pandocTemplate: book.latex
+            fileType: pdf
         
         -
             name: epub
             type: epub
             format: epub
+            pandocTemplate: default.epub
+            fileType: epub
 -
     name: test
     targets:
         -
             name: lulu-digest
             type: print
-            format: digest-11pt
+            format: digest-10pt
             papersize: digest
-            fontsize: 11pt
+            fontsize: 10pt
             print: www.lulu.com
             cover: cover-digest.css
+            pandocTemplate: book.latex
+            fileType: pdf
