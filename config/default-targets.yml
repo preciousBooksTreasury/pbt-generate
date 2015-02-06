@@ -121,3 +121,24 @@
             cover: cover-digest.css
             pandocTemplate: book.latex
             fileType: pdf
+        -
+            name: lulu-a5
+            type: print
+            format: a5-10pt
+            papersize: a5
+            fontsize: 10pt
+            print: www.lulu.com
+            cover: cover-a5-lulu.css
+            pandocTemplate: book.latex
+            fileType: pdf
+        -
+            name: lulu-a4
+            type: print
+            format: a4-10pt
+            papersize: a5
+            fontsize: 10pt
+            print: www.lulu.com
+            cover: cover-a5-lulu.css
+            pandocTemplate: book.latex
+            fileType: pdf
+            classoptions: twocolumn

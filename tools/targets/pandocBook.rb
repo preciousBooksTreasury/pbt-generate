@@ -1,17 +1,26 @@
 
-def generatePandocPDF(book, target)
-    metadata,_ = getMetaData(book)
-    metadata.merge!(target)
+def generatePandocPDF(book, metadata, target)
     papersizes = YAML.load_file("#{$home}/config/papersizes.yml")
     metadata['base'] = book
     size = papersizes[metadata['papersize']]
     
     fileName = genFileName(metadata, target)+ "-print"
+    co = ""
+    metadata['classoptions'].each do |x|
+        co += "-V 'classoption:#{x}' "
+    end
+    
+    size_param = ""
+    if(size.has_key? 'width') 
+        size_param = "-V 'geometry:paperwidth=#{size['width']}' \
+        -V 'geometry:paperheight=#{size['height']}'"
+    elsif(size.has_key? 'alias')
+        size_param = "-V 'papersize:#{size['alias']}'";
+    end
     
     #generate book
     a = "pandoc \
-        -V 'geometry:paperwidth=#{size['width']}' \
-        -V 'geometry:paperheight=#{size['height']}' \
+        #{size_param} \
         -V 'fontsize:#{metadata['fontsize']}' \
         -V 'author:#{metadata['author']}' \
         -V 'title:#{metadata['title']}' \
@@ -26,9 +35,7 @@ def generatePandocPDF(book, target)
         -V 'lang:#{metadata['language']}' \
         -V 'fontfamily:#{metadata['font']}' \
         -V 'documentclass:memoir' \
-        -V 'classoption:twoside' \
-        -V 'classoption:openright' \
-        -V 'classoption:final' \
+        #{co} \
         --template='pandoc/#{metadata['pandocTemplate']}' \
         --toc \
         --latex-engine=xelatex \
@@ -39,15 +46,12 @@ def generatePandocPDF(book, target)
     if($?.success?)
         puts "generated #{fileName}.pdf"
     else
-        puts "#{fileName} failed"
+        puts "failed #{fileName}"
     end
 end
 
 
-def generatePandocEPUB(book, target)
-    metadata,_ = getMetaData(book)
-    metadata.merge!(target)
-    papersizes = YAML.load_file("#{$home}/config/papersizes.yml")
+def generatePandocEPUB(book, metadata, target)
     metadata['base'] = book
     
     fileName = genFileName(metadata, target)+ "-print"
@@ -74,7 +78,7 @@ def generatePandocEPUB(book, target)
     if($?.success?)
         puts "generated #{fileName}.pdf"
     else
-        puts "#{fileName} failed"
+        puts "failed #{fileName}"
     end
 end
 

@@ -72,12 +72,24 @@ def getMetaData(book)
     metadata['language'] = getLanguageName(book)
     targets = getTargets(metadata);
   
-    if(not metadata.has_key? 'font')
-      metadata['font'] = 'lmodern'
-    end
     metadata['gentime'] = Time.now.to_s
     return metadata,targets
 end
+
+def prepareMetadata(metadata)
+    if(not metadata.has_key? 'font')
+        metadata['font'] = 'lmodern'
+    end
+    if(not metadata.has_key? 'classoptions')
+        metadata['classoptions'] = ['twoside','openright','final']
+    else
+        if(metadata['classoptions'].is_a?(String)) 
+            metadata['classoptions'] =  metadata['classoptions'].split(',')
+        end
+    end
+    return metadata
+end
+
 
 def prepareUniverse()
     Dir.mkdir $outputPath if not Dir.exists? $outputPath

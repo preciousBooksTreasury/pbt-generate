@@ -56,11 +56,14 @@ def main()
         puts "generating #{item}"
         metadata,targets = getMetaData(item)
         targets.each do |t|
+            metadata_copy = metadata.merge(t)
+            metadata_copy = prepareMetadata(metadata_copy)
+            
             if(t['type'] == "print")
-                generatePandocPDF(item, t) if targetIncluded? "book"
-                generateCover(item, $home + "/template/cover.html", t) if targetIncluded? "cover"
+                generatePandocPDF(item, metadata_copy, t) if targetIncluded? "book"
+                generateCover(item, metadata_copy, $home + "/template/cover.html", t) if targetIncluded? "cover"
             elsif(t['type'] == "epub")
-                generatePandocEPUB(item, t) if targetIncluded? "book"
+                generatePandocEPUB(item, metadata_copy, t) if targetIncluded? "book"
             end
         end
     end

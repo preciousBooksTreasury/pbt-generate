@@ -1,21 +1,19 @@
 ---
 a4: 
-    width: 210mm
-    height: 297mm
+    alias: a4paper
     top: 2cm
     bottom: 2cm
     left: 2.5cm
     right: 2cm
 a5: 
-    width: 148mm
-    height: 210mm
+    alias: a5paper
     top: 2cm
     bottom: 2cm
     left: 2.5cm
     right: 2cm
 taschenbuch: 
-    width: 12.5cm
-    height: 19cm
+    width: 125mm
+    height: 190mm
     top: 2cm
     bottom: 2cm
     left: 2.5cm
