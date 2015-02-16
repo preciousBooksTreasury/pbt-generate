@@ -1,10 +1,10 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-\fixpdflayout
 $if(fontfamily)$
     \usepackage{$fontfamily$}
 $else$
     \usepackage{lmodern}
 $endif$
+
 
 $if(linestretch)$
     \usepackage{setspace}
@@ -28,7 +28,6 @@ $endif$
     \else
         \usepackage{fontspec}
     \fi
-
     \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
     \newcommand{\euro}{€}
     
@@ -66,7 +65,7 @@ $endif$
 $if(lang)$
     \ifxetex
         \usepackage{polyglossia}
-        \setmainlanguage{$mainlang$}
+        %\setmainlanguage{$lang$}
     \else
         \usepackage[shorthands=off,$lang$]{babel}
     \fi
@@ -177,11 +176,31 @@ $for(header-includes)$
     $header-includes$
 $endfor$
 
+
+
 % min extra
 
 \renewcommand{\cftchapterfont}{\normalfont\sffamily}   
-\renewcommand{\cftsectionfont}{\normalfont\sffamily}  
+\renewcommand{\cftsectionfont}{\normalfont\sffamily} 
 
+\settrims{0pt}{0pt}% set trims - see page 22
+\setbinding{0pt}% adjust if you need an allowance for binding
+%\setlrmargins{*}{*}{2}% the outer margin twice the width of the inner
+%\setulmargins{*}{*}{2}% lower margin twice the height of the upper
+%\setheadfoot{14pt}{28pt}% header height of 14pt and foot skip of 28pt - page 20
+%\setheaderspaces{*}{*}{.5}% drop the header by twice the distance from the header to the top of the text block
+%\setcolsepandrule{10pt}{0pt}% 10pt between columns in two-column layout, with no vertical rule drawn
+% \fixpdflayout% use this if not using pdfLaTeX
+
+%\fixthelayout 
+\fixpdflayout 
+\renewcommand{\thesubsection}{}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
 % ======================== DOCUMENT BEGINSG HERE ===========================0
 \begin{document}
 
@@ -238,14 +257,14 @@ $endif$
 \mainmatter
 
 \copypagestyle{ruled-top-folio}{ruled}
-\makeevenhead{ruled-top-folio}{\scshape\normalfont\textsc{\leftmark}}{}{\thepage}
-\makeoddhead{ruled-top-folio}{\thepage}{}{\normalfont\textsc{\rightmark}}
+\makeevenhead{ruled-top-folio}{\scshape\small\normalfont\textsc{\leftmark}}{}{\thepage}
+\makeoddhead{ruled-top-folio}{\thepage}{}{}
 \makeevenfoot{ruled-top-folio}{}{}{}
 \makeoddfoot{ruled-top-folio}{}{}{}
 
 \copypagestyle{ruled-bottom-folio}{ruled}
-\makeevenhead{ruled-bottom-folio}{\scshape\normalfont\textsc{\leftmark}}{}{}
-\makeoddhead{ruled-bottom-folio}{}{}{\normalfont\textsc{\rightmark}}
+\makeevenhead{ruled-bottom-folio}{\scshape\small\normalfont\textsc{\leftmark}}{}{}
+\makeoddhead{ruled-bottom-folio}{}{}{\normalfont\small\textsc{\rightmark}}
 \makeevenfoot{ruled-bottom-folio}{}{\thepage}{}
 \makeoddfoot{ruled-bottom-folio}{}{\thepage}{}
 
@@ -263,7 +282,6 @@ $endif$
   \renewcommand*{\chaptitlefont}{\Huge\itshape}
   }
 \chapterstyle{dash-big}
-
 
 $body$
 

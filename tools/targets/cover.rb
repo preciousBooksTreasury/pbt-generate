@@ -1,8 +1,5 @@
 
-def generateCover(book, template, t)
-    metadata,_ = getMetaData(book)
-    metadata.merge!(t)
-    
+def generateCover(book, metadata, target, template)
     #generate toc
     if(not metadata.has_key? 'img')
         return
@@ -20,7 +17,7 @@ def generateCover(book, template, t)
     tmpl = IO.read(template)#read template file
     out = parseTemplate(tmpl, metadata) # apply metdata variables
     
-    f = genFileName(metadata, t) + "-cover" # new filename
+    f = genFileName(metadata, target) + "-cover" # new filename
     
     #write html
     aFile = File.new(f+".html", "w")

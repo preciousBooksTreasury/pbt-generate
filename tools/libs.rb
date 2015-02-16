@@ -15,7 +15,6 @@ class Dir
                 #ignore
             else
                 block.call(path + "/", fname)
-
                 #recurse if possible
                 if File.directory?(path + "/" + fname)
                     each_recursive(path+"/"+fname, &block)
@@ -32,7 +31,7 @@ end
 
 def genFolderName(metadata)
     a = metadata['author']
-    if metadata['originalAuthor']
+    if metadata.has_key? 'originalAuthor' and metadata['originalAuthor'] != ""
         a = metadata['originalAuthor']
     end
     path = $outputPath + '/' + a
@@ -47,7 +46,14 @@ end
 
 
 def getLanguageName(book)
-    book.split('/')[-1]
+    a = book.split('/')[-1]
+    if a == "en"
+        return "english"
+    elsif a == "de"
+        return "german"
+    elsif a == "ru"
+        return "russian"
+    end
 end
 
 def getTargets(metadata)
@@ -79,6 +85,9 @@ end
 def prepareMetadata(metadata)
     if(not metadata.has_key? 'font')
         metadata['font'] = 'lmodern'
+        metadata['mainfont'] = 'CMU Serif'
+        metadata['sansfont'] = 'CMU Sans Serif'
+        metadata['monofont'] = 'CMU Typewriter Text'
     end
     if(not metadata.has_key? 'classoptions')
         metadata['classoptions'] = ['twoside','openright','final']
@@ -105,4 +114,8 @@ def readAllBooks(book)
     return data
 end
 
-
+def sanitizeBash(string)
+    return nil if string == nil
+    return string.gsub("'","")
+end
+    
