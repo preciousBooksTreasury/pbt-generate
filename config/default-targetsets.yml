@@ -1,0 +1,17 @@
+---
+-
+    name: default
+    targets:
+        - epubli-taschenbuch-10pt
+        - lulu-digest-10pt
+        - epub
+-
+    name: default-big
+    targets:
+        - epubli-taschenbuch-11pt
+        - lulu-digest-11pt
+        - epub
+-
+    name: digital
+    targets:
+        - epub

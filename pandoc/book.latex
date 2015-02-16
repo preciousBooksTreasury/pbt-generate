@@ -28,7 +28,7 @@ $endif$
     \else
         \usepackage{fontspec}
     \fi
-    \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+    %\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
     \newcommand{\euro}{€}
     
     $if(mainfont)$
@@ -63,12 +63,10 @@ $if(geometry)$
 $endif$
 
 $if(lang)$
-    \ifxetex
         \usepackage{polyglossia}
         %\setmainlanguage{$lang$}
-    \else
-        \usepackage[shorthands=off,$lang$]{babel}
-    \fi
+        \setdefaultlanguage{$lang$}
+
 $endif$
 
 $if(natbib)$
@@ -121,7 +119,7 @@ $endif$
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
+              xetex,$lang$]{hyperref}
 \else
   \usepackage[unicode=true]{hyperref}
 \fi

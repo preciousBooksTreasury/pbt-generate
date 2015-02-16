@@ -1,134 +1,47 @@
 ---
 -
-    name: default
-    targets:
-        -
-            name: lulu-digest
-            type: print
-            format: digest-11pt
-            papersize: digest
-            fontsize: 11pt
-            print: www.lulu.com
-            cover: cover-digest-lulu.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        
-        -
-            name: lulu-a5
-            type: print
-            format: a5-11pt
-            papersize: a5
-            fontsize: 11pt
-            print: www.lulu.com
-            cover: cover-a5-lulu.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        -
-            name: epubli-a5
-            type: print
-            papersize: a5
-            fontsize: 10pt
-            format: a5-10pt
-            print: www.epubli.de
-            cover: cover-a5-epubli.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        -
-            name: epubli-taschenbuch
-            type: print
-            format: taschenbuch-10pt
-            print: www.epubli.de
-            papersize: taschenbuch
-            fontsize: 10pt
-            cover: cover-taschenbuch-epubli.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        -
-            name: epub
-            type: epub
-            format: epub
-            pandocTemplate: default.epub
-            fileType: epub
+    name: epubli-taschenbuch-10pt
+    type: print
+    format: taschenbuch-10pt
+    print: www.epubli.de
+    papersize: taschenbuch
+    fontsize: 10pt
+    cover: cover-taschenbuch-epubli.css
+    pandocTemplate: book.latex
+    fileType: pdf
 -
-    name: default-big
-    targets: 
-        -
-            name: epubli-a5
-            type: print
-            format: a5-11pt
-            papersize: a5
-            fontsize: 11pt
-            print: www.epubli.de
-            cover: cover-a5.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        -
-            name: epub
-            type: epub
-            format: epub
-            pandocTemplate: default.epub
-            fileType: epub
+    name: epubli-taschenbuch-11pt
+    type: print
+    format: taschenbuch-10pt
+    print: www.epubli.de
+    papersize: taschenbuch
+    fontsize: 10pt
+    cover: cover-taschenbuch-epubli.css
+    pandocTemplate: book.latex
+    fileType: pdf
 -
-    name: digital
-    targets:
-        -
-            name: epub
-            type: epub
-            format: epub
-            pandocTemplate: default.epub
-            fileType: epub
+    name: lulu-digest-11pt
+    type: print
+    format: digest-11pt
+    papersize: digest
+    fontsize: 11pt
+    print: www.lulu.com
+    cover: cover-digest-lulu.css
+    pandocTemplate: book.latex
+    fileType: pdf
 -
-    name: small
-    targets:
-        -
-            name: lulu-digest
-            type: print
-            format: digest-11pt
-            papersize: digest
-            fontsize: 11pt
-            print: www.lulu.com
-            cover: cover-digest.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        
-        -
-            name: epubli-taschenbuch
-            type: print
-            format: taschenbuch-11pt
-            papersize: taschenbuch
-            fontsize: 11pt
-            print: www.epubli.de
-            cover: cover-taschenbuch.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        
-        -
-            name: epub
-            type: epub
-            format: epub
-            pandocTemplate: default.epub
-            fileType: epub
+    name: lulu-digest-10pt
+    type: print
+    format: digest-11pt
+    papersize: digest
+    fontsize: 11pt
+    print: www.lulu.com
+    cover: cover-digest-lulu.css
+    pandocTemplate: book.latex
+    fileType: pdf
 -
-    name: test
-    targets:
-        -
-            name: lulu-a5
-            type: print
-            format: a5-10pt
-            papersize: a5
-            fontsize: 10pt
-            print: www.lulu.com
-            cover: cover-a5-lulu.css
-            pandocTemplate: book.latex
-            fileType: pdf
-        -
-            name: lulu-a4
-            type: print
-            format: a4-10pt
-            papersize: a4
-            fontsize: 10pt
-            print: www.lulu.com
-            cover: cover-a5-lulu.css
-            pandocTemplate: book.latex
-            fileType: pdf
-            classoptions: twocolumn,openany
+    name: epub
+    type: epub
+    format: epub
+    pandocTemplate: default.epub
+    fileType: epub

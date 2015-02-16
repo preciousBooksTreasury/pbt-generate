@@ -15,21 +15,34 @@ def generatePandocPDF(book, metadata, target)
     if(size.has_key? 'width') 
         size_param = "-V 'geometry:paperwidth=#{size['width']}' \
         -V 'geometry:paperheight=#{size['height']}'"
-        
-        geometry = "-V 'geometry:top=#{size['top']}, bottom=#{size['bottom']}, left=#{size['left']}, right=#{size['right']}'"
     elsif(size.has_key? 'alias')
         size_param = "-V 'papersize:#{size['alias']}'"
-        
-        geometry = "-V geometry:'vmarginratio={100:161},heightrounded'"
-     
     end
+    geometry = ""
+    
+    if(size.has_key? 'left') 
+        geometry += "left=#{size['left']},"
+    end
+    if(size.has_key? 'right') 
+        geometry += "right=#{size['right']},"
+    end
+    if(size.has_key? 'top') 
+        geometry += "top=#{size['top']},"
+    end
+    if(size.has_key? 'bottom') 
+        geometry += "bottom=#{size['bottom']},"
+    end
+    if(size.has_key? 'geometryoptions') 
+        geometry += size['geometryoptions']
+    end
+
     #        -V 'fontfamily:#{metadata['font']}' \
     #        -V 'mainfont:Times New Roman' \
 
     #generate book
-    a = "pandoc \
+    a = "cd '#{book}' && pandoc \
         #{size_param} \
-        #{geometry} \
+        -V 'geometry:#{geometry}' \
         -V 'fontsize:#{metadata['fontsize']}' \
         -V 'author:#{metadata['author']}' \
         -V 'title:#{sanitizeBash(metadata['title'])}' \
@@ -46,8 +59,9 @@ def generatePandocPDF(book, metadata, target)
         -V 'sansfont:#{metadata['sansfont']}' \
         -V 'monofont:#{metadata['monofont']}' \
         -V 'documentclass:memoir' \
+        --no-tex-ligatures \
         #{co} \
-        --template='pandoc/#{metadata['pandocTemplate']}' \
+        --template='#{$home}/pandoc/#{metadata['pandocTemplate']}' \
         --toc \
         --latex-engine=xelatex \
         -s '#{book}/data.markdown' \
@@ -68,7 +82,7 @@ def generatePandocEPUB(book, metadata, target)
     fileName = genFileName(metadata, target)+ "-print"
     
     #generate book
-    a = "pandoc \
+    a = "cd '#{book}' && pandoc \
         -V 'author:#{sanitizeBash(metadata['author'])}' \
         -V 'title:#{sanitizeBash(metadata['title'])})' \
         -V 'subtitle:#{sanitizeBash(metadata['subtitle'])}' \
@@ -80,7 +94,7 @@ def generatePandocEPUB(book, metadata, target)
         -V 'original-title:#{sanitizeBash(metadata['originalTitle'])}' \
         -V 'original-author:#{sanitizeBash(metadata['originalAuthor'])}' \
         -V 'lang:#{metadata['language']}' \
-        --template='pandoc/#{metadata['pandocTemplate']}' \
+        --template='#{$home}/pandoc/#{metadata['pandocTemplate']}' \
         --toc \
         -s '#{book}/data.markdown' \
         -o '#{fileName}.#{metadata['fileType']}'"

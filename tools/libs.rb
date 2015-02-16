@@ -31,6 +31,9 @@ end
 
 def genFolderName(metadata)
     a = metadata['author']
+    if metadata.has_key? 'latinAuthor' and metadata['latinAuthor'] != ""
+        a = metadata['latinAuthor']
+    end
     if metadata.has_key? 'originalAuthor' and metadata['originalAuthor'] != ""
         a = metadata['originalAuthor']
     end
@@ -55,18 +58,40 @@ def getLanguageName(book)
         return "russian"
     end
 end
+def getTargetByName(name)
+    targets = YAML.load_file("#{$home}/config/default-targets.yml")
+    targets.each do |target|
+        if target['name'] == name
+            return target
+        end
+    end
+    return nil
+end
+def getTargetSetByName(name)
+    target_sets = YAML.load_file("#{$home}/config/default-targetsets.yml")
+    target_sets.each do |target_set|
+        if(target_set['name'] == name)
+            targets = []
+            target_set['targets'].each do |target_name|
+                targets << getTargetByName(target_name)
+            end
+            return targets
+        end
+    end
+    return nil
+end
 
 def getTargets(metadata)
-    target_sets = YAML.load_file("#{$home}/config/default-targets.yml")
-    targets = Hash.new()
-    targets_raw = metadata['targets']
-    targets_raw.each do |t|
-        if t.is_a? String
-            target_sets.each do |s|
-                if s['name'] == t
-                    targets = s['targets']
-                end
-            end
+    targets = []
+    if(metadata.has_key? 'targets')
+        metadata['targets'].each do |t|
+            targets << getTargetByName(t)
+        end
+    end
+    
+    if(metadata.has_key? 'target-sets')
+        metadata['target-sets'].each do |t|
+            targets.concat(getTargetSetByName(t))
         end
     end
     return targets
@@ -90,7 +115,7 @@ def prepareMetadata(metadata)
         metadata['monofont'] = 'CMU Typewriter Text'
     end
     if(not metadata.has_key? 'classoptions')
-        metadata['classoptions'] = ['twoside','openright','final']
+        metadata['classoptions'] = ['twoside','openany','final']
     else
         if(metadata['classoptions'].is_a?(String)) 
             metadata['classoptions'] =  metadata['classoptions'].split(',')
