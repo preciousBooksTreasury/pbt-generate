@@ -43,8 +43,8 @@ def genFolderName(metadata)
 end
 
 def compassCompile()
-    a = `ls /usr/bin | grep compass`
-    `#{a} compile '#{$home}'`
+    $compass = `ls /usr/bin | grep compass`.strip
+    `#{$compass} compile '#{$home}'`
 end
 
 
@@ -101,10 +101,11 @@ def getMetaData(book)
     metadata = YAML.load_file(book + "/metadata.yml")
     
     metadata['language'] = getLanguageName(book)
-    targets = getTargets(metadata);
-  
     metadata['gentime'] = Time.now.to_s
-    return metadata,targets
+    
+    targets = getTargets(metadata);
+
+    return metadata, targets
 end
 
 def prepareMetadata(metadata)

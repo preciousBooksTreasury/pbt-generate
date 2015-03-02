@@ -9,16 +9,29 @@
     cover: cover-taschenbuch-epubli.css
     pandocTemplate: book.latex
     fileType: pdf
+    binding: Softcover
 -
     name: epubli-taschenbuch-11pt
     type: print
     format: taschenbuch-10pt
     print: www.epubli.de
     papersize: taschenbuch
-    fontsize: 10pt
+    fontsize: 11pt
     cover: cover-taschenbuch-epubli.css
     pandocTemplate: book.latex
     fileType: pdf
+    binding: Softcover
+-
+    name: epubli-taschenbuch-booklet-11pt
+    type: print
+    format: taschenbuch-10pt
+    print: www.epubli.de
+    papersize: taschenbuch
+    fontsize: 11pt
+    cover: cover-taschenbuch-booklet-epubli.css
+    pandocTemplate: book.latex
+    fileType: pdf
+    binding: Booklet
 -
     name: lulu-digest-11pt
     type: print
@@ -29,6 +42,18 @@
     cover: cover-digest-lulu.css
     pandocTemplate: book.latex
     fileType: pdf
+    binding: Softcover
+-
+    name: lulu-digest-booklet-11pt
+    type: print
+    format: digest-11pt
+    papersize: digest
+    fontsize: 11pt
+    print: www.lulu.com
+    cover: cover-digest-lulu.css
+    pandocTemplate: book.latex
+    fileType: pdf
+    binding: Booklet
 -
     name: lulu-digest-10pt
     type: print
@@ -39,6 +64,7 @@
     cover: cover-digest-lulu.css
     pandocTemplate: book.latex
     fileType: pdf
+    binding: Softcover
 -
     name: epub
     type: epub

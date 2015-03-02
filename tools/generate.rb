@@ -52,15 +52,19 @@ def main()
         next if(not File.directory? item) # skip files
         next if(not File.exists?(item + "/metadata.yml"))
         next if $options[:includePath] != nil and (not item.include? $options[:includePath])
-        
         metadata,targets = getMetaData(item)
+        next if targets == []
         targets.each do |t|
             puts "\n\n \e[32mGENERATING\e[0m \e[1m#{t['name']}\e[0m of #{item} \n\n"
             metadata_copy = metadata.merge(t)
             metadata_copy = prepareMetadata(metadata_copy)
             
             if(t['type'] == "print")
+                puts "\n\n    \e[33mGENERATING\e[0m  PDF of #{item} \n\n"
                 generatePandocPDF(item, metadata_copy, t) if targetIncluded? "book"
+                puts "\n\n    \e[33mGENERATING\e[0m  cover config of #{item} \n\n"
+                generateCoverFile(item, metadata_copy, t) if targetIncluded? "cover"
+                puts "\n\n    \e[33mGENERATING\e[0m  cover of #{item} \n\n"
                 generateCover(item, metadata_copy, t, $home + "/template/cover.html") if targetIncluded? "cover"
             elsif(t['type'] == "epub")
                 generatePandocEPUB(item, metadata_copy, t) if targetIncluded? "book"

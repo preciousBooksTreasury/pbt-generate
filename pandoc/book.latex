@@ -273,7 +273,7 @@ $endif$
 
 %\pagestyle{companion-folio}
 %\pagestyle{ruled-bottom-folio}
-\pagestyle{ruled-top-folio}
+\pagestyle{ruled-bottom-folio}
 
 \makechapterstyle{dash-big}{%
   \chapterstyle{dash}

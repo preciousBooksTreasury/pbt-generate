@@ -1,4 +1,4 @@
-
+require_relative 'epubli_size.rb'
 def generateCover(book, metadata, target, template)
     #generate toc
     if(not metadata.has_key? 'img')
@@ -6,7 +6,14 @@ def generateCover(book, metadata, target, template)
     end
     
     # set metadata variables
-    metadata['css'] = book + '/'+metadata['cover']
+    css_file_local = genFileName(metadata, target)+"-cover.css"
+    css_file_global = book + '/'+metadata['cover']
+    if(File.exists? css_file_local)
+        metadata['css'] =  css_file_local
+    end
+    if(File.exists? css_file_global)
+        metadata['css'] =  css_file_global
+    end
     return if metadata['img'] == {}
     metadata['img'] = $home +"/cover/" +  metadata['img'];
     metadata['base'] = book
@@ -27,4 +34,32 @@ def generateCover(book, metadata, target, template)
     puts "filename ===="  + f
     system("wkhtmltoimage \"#{f}.html\" \"#{f}.jpg\"")
     
+end
+
+def getPDFPagecount(file)
+    ret = `pdfinfo "#{file}" | grep ^Pages:`.strip
+    ret.split(':')[1].strip
+end
+
+def generateCoverFile(book, metadata, target)
+    pdf_file = genFileName(metadata, target)+"-print.pdf"
+    pagecount = getPDFPagecount(pdf_file)
+    if(target['print'] == "www.epubli.de") 
+        size = getEpubliSize(target['papersize'], target['binding'], pagecount)
+    else
+        return
+    end
+    css_file = genFileName(metadata, target)+"-cover.scss"
+    File.write(css_file, 
+"@import 'style/_tools.scss';
+@import 'style/_coverConfig.scss';
+$width: #{size[0]};
+$height: #{size[1]};
+$back: #{size[2]};
+$begin: #{size[3]};
+$padding: #{size[4]};
+@import 'style/_cover.scss';")
+    
+    #compile
+    `#{$compass} compile "#{css_file}"`
 end
