@@ -52,6 +52,7 @@ def main()
         next if(not File.directory? item) # skip files
         next if(not File.exists?(item + "/metadata.yml"))
         next if $options[:includePath] != nil and (not item.include? $options[:includePath])
+        puts item
         metadata,targets = getMetaData(item)
         next if targets == []
         targets.each do |t|

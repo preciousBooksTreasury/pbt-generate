@@ -33,6 +33,17 @@
     fileType: pdf
     binding: Booklet
 -
+    name: epubli-a5-booklet-10pt
+    type: print
+    format: a5-10pt
+    print: www.epubli.de
+    papersize: a5
+    fontsize: 10pt
+    cover: cover-a5-booklet-epubli.css
+    pandocTemplate: book.latex
+    fileType: pdf
+    binding: Booklet
+-
     name: lulu-digest-11pt
     type: print
     format: digest-11pt

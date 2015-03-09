@@ -12,6 +12,11 @@
         - lulu-digest-booklet-11pt
         - epub
 -
+    name: booklet-big
+    targets:
+        - epubli-a5-booklet-10pt
+        - epub
+-
     name: default-big
     targets:
         - epubli-taschenbuch-11pt
