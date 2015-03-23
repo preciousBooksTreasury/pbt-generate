@@ -150,3 +150,15 @@ def sanitizeBash(string)
     return string.gsub("'","")
 end
     
+def error_msg(msg)
+    puts "\e[91mERROR\e[0m #{msg}"
+    exit 1
+end
+
+def info_msg(msg)
+    puts "\e[93mINFO\e[0m #{msg}"
+end
+
+def ok_msg(msg)
+    puts "\e[34mOK\e[0m #{msg}"
+end

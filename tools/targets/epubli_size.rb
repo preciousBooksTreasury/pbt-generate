@@ -2,10 +2,9 @@ require "uri"
 require "net/http"
 require 'json'
 $epublisize = {}
-$epublisize["A5"] = 5
 $epublisize["taschenbuch"] = 9
-$epublisize["A5"] = 3
-$epublisize["A4"] = 1
+$epublisize["a5"] = 3
+$epublisize["a4"] = 1
 
 $epublibinding = {}
 $epublibinding["Softcover"] = 5

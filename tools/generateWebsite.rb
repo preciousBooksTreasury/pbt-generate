@@ -1,13 +1,11 @@
 require 'fileutils'
 
 def generateWebsite()
-  puts "GENERATING WEBSITE"
+  ok_msg "GENERATING WEBSITE"
   config = YAML.load_file("#{$home}/config/site.yml")
   
   items = ""
   config["items"].each do |book|
-    
-    puts book.class
     bookConfig = YAML.load_file("#{$home}/#{book["path"]}/metadata.yml")
     
     buy_html = ""
@@ -31,3 +29,5 @@ def generateWebsite()
   FileUtils.mkpath "#{$outputPath}/website/"
   File.open("#{$outputPath}/website/index.html", 'w') { |file| file.write(html) }
 end
+
+

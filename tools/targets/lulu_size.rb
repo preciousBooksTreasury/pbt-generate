@@ -8,8 +8,8 @@ module LuluCover
   $lulusize = {}
   $lulusize["taschenbuch"] = 4
   $lulusize["digest"] = 18
-  $lulusize["A5"] = 15
-  $lulusize["A4"] = 11
+  $lulusize["a5"] = 15
+  $lulusize["a4"] = 11
 
 
   $lulubinding = {}
@@ -23,11 +23,16 @@ module LuluCover
   
   # return : :width, :height :back, :beginn
   def LuluCover.getSize(size, bind, pagecount)
+    error_msg("Wrong size name #{size}") if not $lulusize.has_key? size
+    error_msg("Wrong binding name #{bind}") if not $lulubinding.has_key? bind
+    
     package = LuluCover.findPackage($lulusize[size],$lulubinding[bind], 2)
     return LuluCover.calculate(package, pagecount)
   end
       
   def LuluCover.calculate(package, pagecount)
+    puts package
+    puts pagecount
     puts package["cover_measurements"]
     height = LuluCover.cmToPx(package["cover_measurements"]["full_height_with_bleed"]["cm"].to_f)
     back = package["per_page_thickness"]["cm"].to_f * pagecount.to_f
@@ -48,6 +53,7 @@ module LuluCover
         return x 
       end
     end
+    error_msg("Lulu Package trimsize_id = #{trimsize_id} bindinding_id = #{binding_id} not found")
     return nil
   end
   

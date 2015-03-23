@@ -20,24 +20,24 @@ $en = Hash["l-toc" => "Index"]
 def getOptions()
     options = {}
     options[:cleanUp] = true
+    options[:onlyCover] = false
     optparse = OptionParser.new do|opts|
         opts.banner = "Usage: generate.rb [options]"
     
         opts.on('--includePath PATH', 'Only this Path' ) do |x|
             options[:includePath] = x
-            puts x
         end
         opts.on('--includeTarget TARGET', 'Only this Target' ) do |x|
             options[:includeTarget] = x
-            puts x
         end
         opts.on('--excludeTarget TARGET', 'All but not this target' ) do |x|
             options[:excludeTarget] = x
-            puts x
         end
-         opts.on('--noCleanUp', 'Do not cleanup' ) do 
+        opts.on('--noCleanUp', 'Do not cleanup' ) do 
             options[:cleanUp] = false
-            puts x
+        end
+        opts.on('--onlyCover', 'Only Cover' ) do 
+            options[:onlyCover] = true
         end
     end.parse!
     return options
@@ -63,8 +63,11 @@ def main()
             metadata_copy = prepareMetadata(metadata_copy)
             
             if(t['type'] == "print")
-                puts "\n\n    \e[33mGENERATING\e[0m  PDF of #{item} \n\n"
-                generatePandocPDF(item, metadata_copy, t) if targetIncluded? "book"
+                if(not $options[:onlyCover])
+                    puts "\n\n    \e[33mGENERATING\e[0m  PDF of #{item} \n\n"
+                    generatePandocPDF(item, metadata_copy, t) if targetIncluded? "book"
+                end
+                
                 puts "\n\n    \e[33mGENERATING\e[0m  cover config of #{item} \n\n"
                 generateCoverFile(item, metadata_copy, t) if targetIncluded? "cover"
                 puts "\n\n    \e[33mGENERATING\e[0m  cover of #{item} \n\n"

@@ -173,9 +173,14 @@ $endif$
 $for(header-includes)$
     $header-includes$
 $endfor$
-
-
-
+% Suppressing hyphenation across pages
+% See http://tex.stackexchange.com/questions/8558/suppressing-hyphenation-across-pages
+\brokenpenalty=10000
+%\pretolerance=1000
+%\tolerance=2000
+%\emergencystretch=10pt
+\lefthyphenmin=4
+\righthyphenmin=4
 % min extra
 
 \renewcommand{\cftchapterfont}{\normalfont\sffamily}   

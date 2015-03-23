@@ -18,8 +18,8 @@ def generateCover(book, metadata, target, template)
     return if metadata['img'] == {}
     metadata['img'] = $home +"/cover/" +  metadata['img'];
     metadata['base'] = book
-    if(metadata.has_key? 'isbn')
-        metadata['isbn-pic'] = "<img id=\"isbn\" src=\""+metadata['base']+"/isbn.png\" />"
+    if(target.has_key? 'isbn')
+        target['isbn-pic'] = "<img id=\"isbn\" src=\""+metadata['base']+"/isbn.png\" />"
     end
     
     tmpl = IO.read(template)#read template file

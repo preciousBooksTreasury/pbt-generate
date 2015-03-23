@@ -4,8 +4,7 @@ README
 install
 
 you need 
- + princexml
  + http://code.google.com/p/wkhtmltopdf/
- + sudo gem install simple-xml sass compass rubyzip
+ + sudo gem install simple-xml sass compass rubyzip bootstrap-sass
  + sudo zypper in pandoc texlive texlive-collection-langcyrillic texlive-libertine-fonts texlive-cm-unicode cm-unicode-fonts
  
