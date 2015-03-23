@@ -1,4 +1,5 @@
 require_relative 'epubli_size.rb'
+require_relative 'lulu_size.rb'
 def generateCover(book, metadata, target, template)
     #generate toc
     if(not metadata.has_key? 'img')
@@ -44,8 +45,10 @@ end
 def generateCoverFile(book, metadata, target)
     pdf_file = genFileName(metadata, target)+"-print.pdf"
     pagecount = getPDFPagecount(pdf_file)
-    if(target['print'] == "www.epubli.de") 
+    if(target['printerName'] == "epubli") 
         size = getEpubliSize(target['papersize'], target['binding'], pagecount)
+    elsif(target['printerName'] == "lulu") 
+        size = LuluCover.getSize(target['papersize'], target['binding'], pagecount)
     else
         return
     end

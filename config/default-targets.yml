@@ -1,6 +1,5 @@
 ---
--
-    name: epubli-taschenbuch-10pt
+epubli-taschenbuch-10pt:
     type: print
     format: taschenbuch-10pt
     print: www.epubli.de
@@ -10,8 +9,9 @@
     pandocTemplate: book.latex
     fileType: pdf
     binding: Softcover
--
-    name: epubli-taschenbuch-11pt
+    printerName: epubli
+  
+epubli-taschenbuch-11pt:
     type: print
     format: taschenbuch-10pt
     print: www.epubli.de
@@ -21,8 +21,9 @@
     pandocTemplate: book.latex
     fileType: pdf
     binding: Softcover
--
-    name: epubli-taschenbuch-booklet-11pt
+    printerName: epubli
+
+epubli-taschenbuch-booklet-11pt:
     type: print
     format: taschenbuch-10pt
     print: www.epubli.de
@@ -32,8 +33,9 @@
     pandocTemplate: book.latex
     fileType: pdf
     binding: Booklet
--
-    name: epubli-a5-booklet-10pt
+    printerName: epubli
+
+epubli-a5-booklet-10pt:
     type: print
     format: a5-10pt
     print: www.epubli.de
@@ -43,8 +45,9 @@
     pandocTemplate: book.latex
     fileType: pdf
     binding: Booklet
--
-    name: lulu-digest-11pt
+    printerName: epubli
+ 
+lulu-digest-11pt:
     type: print
     format: digest-11pt
     papersize: digest
@@ -54,8 +57,9 @@
     pandocTemplate: book.latex
     fileType: pdf
     binding: Softcover
--
-    name: lulu-digest-booklet-11pt
+    printerName: lulu
+
+lulu-digest-booklet-11pt:
     type: print
     format: digest-11pt
     papersize: digest
@@ -65,19 +69,33 @@
     pandocTemplate: book.latex
     fileType: pdf
     binding: Booklet
--
-    name: lulu-digest-10pt
+    printerName: lulu
+
+lulu-digest-10pt:
     type: print
-    format: digest-11pt
+    format: digest-10pt
     papersize: digest
-    fontsize: 11pt
+    fontsize: 10pt
     print: www.lulu.com
     cover: cover-digest-lulu.css
     pandocTemplate: book.latex
     fileType: pdf
     binding: Softcover
--
-    name: epub
+    printerName: lulu
+ 
+lulu-a5-10pt:
+    type: print
+    format: digest-10pt
+    papersize: a5
+    fontsize: 10pt
+    print: www.lulu.com
+    cover: cover-a5-lulu.css
+    pandocTemplate: book.latex
+    fileType: pdf
+    binding: Softcover
+    printerName: lulu
+
+epub:
     type: epub
     format: epub
     pandocTemplate: default.epub

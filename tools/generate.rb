@@ -9,6 +9,7 @@ require_relative 'targets/book.rb'
 require_relative 'targets/pandocBook.rb'
 require_relative 'targets/cover.rb'
 require_relative 'targets/epub.rb'
+require_relative 'generateWebsite.rb'
 
 $home = "/home/paul/Cloud/Bibliothek/PreciousBooksTreasury"
 $outputPath = $home+"/results"
@@ -53,10 +54,11 @@ def main()
         next if(not File.exists?(item + "/metadata.yml"))
         next if $options[:includePath] != nil and (not item.include? $options[:includePath])
         puts item
-        metadata,targets = getMetaData(item)
+        metadata, targets = getMetaData(item)
         next if targets == []
-        targets.each do |t|
-            puts "\n\n \e[32mGENERATING\e[0m \e[1m#{t['name']}\e[0m of #{item} \n\n"
+        
+        targets.each do |name, t|
+            puts "\n\n \e[32mGENERATING\e[0m \e[1m#{name}\e[0m of #{item} \n\n"
             metadata_copy = metadata.merge(t)
             metadata_copy = prepareMetadata(metadata_copy)
             
@@ -72,7 +74,7 @@ def main()
             end
         end
     end
-    
+    generateWebsite();
 end
 def targetIncluded?(name)
     if $options[:includeTarget] != nil

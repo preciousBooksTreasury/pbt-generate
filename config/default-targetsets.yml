@@ -1,28 +1,22 @@
 ---
--
-    name: default
-    targets:
-        - epubli-taschenbuch-10pt
-        - lulu-digest-10pt
-        - epub
--
-    name: booklet
-    targets:
-        - epubli-taschenbuch-booklet-11pt
-        - lulu-digest-booklet-11pt
-        - epub
--
-    name: booklet-big
-    targets:
-        - epubli-a5-booklet-10pt
-        - epub
--
-    name: default-big
-    targets:
-        - epubli-taschenbuch-11pt
-        - lulu-digest-11pt
-        - epub
--
-    name: digital
-    targets:
-        - epub
+default:
+  - epubli-taschenbuch-10pt
+  - lulu-digest-10pt
+  - lulu-a5-10pt
+  - epub
+booklet:
+  - epubli-taschenbuch-booklet-11pt
+  - lulu-digest-booklet-11pt
+  - epub
+  
+booklet-big:
+  - epubli-a5-booklet-10pt
+  - epub
+  
+default-big:
+  - epubli-taschenbuch-11pt
+  - lulu-digest-11pt
+  - epub
+  
+digital:
+  - epub

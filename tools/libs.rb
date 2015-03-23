@@ -60,38 +60,43 @@ def getLanguageName(book)
 end
 def getTargetByName(name)
     targets = YAML.load_file("#{$home}/config/default-targets.yml")
-    targets.each do |target|
-        if target['name'] == name
-            return target
-        end
+    if(not targets.has_key? name)
+      puts "Target '#{name}' not found"
+      return nil
     end
-    return nil
+    t = targets[name]
+    t['name'] = name
+    return t
 end
 def getTargetSetByName(name)
     target_sets = YAML.load_file("#{$home}/config/default-targetsets.yml")
-    target_sets.each do |target_set|
-        if(target_set['name'] == name)
-            targets = []
-            target_set['targets'].each do |target_name|
-                targets << getTargetByName(target_name)
-            end
-            return targets
-        end
+    if(not target_sets.has_key? name)
+      puts "TargetSet #{name} not found"
+      return nil
     end
-    return nil
+    target_set = target_sets[name]
+    targets = {}
+    target_set.each do |target_name|
+      targets[target_name] = getTargetByName(target_name)
+    end
+    return targets
 end
 
 def getTargets(metadata)
-    targets = []
-    if(metadata.has_key? 'targets')
-        metadata['targets'].each do |t|
-            targets << getTargetByName(t)
-        end
-    end
+    targets = {}
     
     if(metadata.has_key? 'target-sets')
         metadata['target-sets'].each do |t|
-            targets.concat(getTargetSetByName(t))
+            targets.merge!(getTargetSetByName(t))
+        end
+    end
+    
+    if(metadata.has_key? 'targets')
+        metadata['targets'].each do |name, content|
+          if(not targets.has_key? name)
+            targets[name] = getTargetByName(name)
+          end
+          targets[name] = targets[name].merge(content)
         end
     end
     return targets
