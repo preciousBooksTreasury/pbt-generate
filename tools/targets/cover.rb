@@ -1,7 +1,6 @@
 require_relative 'epubli_size.rb'
 require_relative 'lulu_size.rb'
 def generateCover(book, metadata, target, template)
-    #generate toc
     if(not metadata.has_key? 'img')
         return
     end
@@ -18,11 +17,13 @@ def generateCover(book, metadata, target, template)
     return if metadata['img'] == {}
     metadata['img'] = $home +"/cover/" +  metadata['img'];
     metadata['base'] = book
+    
     if(target.has_key? 'isbn')
-        target['isbn-pic'] = "<img id=\"isbn\" src=\""+metadata['base']+"/isbn.png\" />"
+        info_msg "has isbn #{target['isbn']}"
+        metadata['isbn-pic'] = "<img id='isbn' src='#{$home}/isbn/#{target['isbn']}.png' />"
     end
     
-    tmpl = IO.read(template)#read template file
+    tmpl = IO.read(template) # read template file
     out = parseTemplate(tmpl, metadata) # apply metdata variables
     
     f = genFileName(metadata, target) + "-cover" # new filename

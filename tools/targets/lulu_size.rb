@@ -31,9 +31,6 @@ module LuluCover
   end
       
   def LuluCover.calculate(package, pagecount)
-    puts package
-    puts pagecount
-    puts package["cover_measurements"]
     height = LuluCover.cmToPx(package["cover_measurements"]["full_height_with_bleed"]["cm"].to_f)
     back = package["per_page_thickness"]["cm"].to_f * pagecount.to_f
     beginn = package["cover_measurements"]["distance_to_spine_with_bleed"]["cm"].to_f

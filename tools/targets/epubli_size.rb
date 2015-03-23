@@ -22,9 +22,7 @@ def getEpubliSize(size, bind, pagecount)
         'e_calculator_paper' => 1,
         'e_calculator_numPages' => pagecount
         }
-    puts params
     x = Net::HTTP.post_form(URI.parse('http://www.epubli.de/interfaces/coverCalc.php'), params)
-    puts x.body
     ret = JSON.parse(x.body)
     width = parse_epubli(ret['results']['coverWidth'])
     height = parse_epubli(ret['results']['coverHeight'])

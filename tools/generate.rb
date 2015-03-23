@@ -61,7 +61,7 @@ def main()
             puts "\n\n \e[32mGENERATING\e[0m \e[1m#{name}\e[0m of #{item} \n\n"
             metadata_copy = metadata.merge(t)
             metadata_copy = prepareMetadata(metadata_copy)
-            
+            puts t
             if(t['type'] == "print")
                 if(not $options[:onlyCover])
                     puts "\n\n    \e[33mGENERATING\e[0m  PDF of #{item} \n\n"
