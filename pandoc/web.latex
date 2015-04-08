@@ -1,0 +1,322 @@
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+$if(fontfamily)$
+    \usepackage{$fontfamily$}
+$else$
+    \usepackage{lmodern}
+$endif$
+
+
+$if(linestretch)$
+    \usepackage{setspace}
+    \setstretch{$linestretch$}
+$endif$
+
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    $if(euro)$
+        \usepackage{eurosym}
+    $endif$
+\else % if luatex or xelatex
+    \ifxetex
+        \usepackage{mathspec}
+        \usepackage{xltxtra,xunicode}
+    \else
+        \usepackage{fontspec}
+    \fi
+    %\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+    \newcommand{\euro}{€}
+    
+    $if(mainfont)$
+        \setmainfont{$mainfont$}
+    $endif$
+    $if(sansfont)$
+        \setsansfont{$sansfont$}
+    $endif$
+    $if(monofont)$
+        \setmonofont[Mapping=tex-ansi]{$monofont$}
+    $endif$
+    $if(mathfont)$
+        \setmathfont(Digits,Latin,Greek){$mathfont$}
+    $endif$
+\fi
+
+
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+
+% geometry package
+$if(geometry)$
+    \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+
+$if(lang)$
+        \usepackage{polyglossia}
+        %\setmainlanguage{$lang$}
+        \setdefaultlanguage{$lang$}
+
+$endif$
+
+$if(natbib)$
+    \usepackage{natbib}
+    \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+
+$if(biblatex)$
+    \usepackage{biblatex}
+    $if(biblio-files)$
+        \bibliography{$biblio-files$}
+    $endif$
+
+$endif$
+
+
+$if(listings)$
+    \usepackage{listings}
+$endif$
+
+$if(lhs)$
+    \lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+
+$if(highlighting-macros)$
+    $highlighting-macros$
+$endif$
+
+$if(verbatim-in-note)$
+    \usepackage{fancyvrb}
+    \VerbatimFootnotes
+$endif$
+
+$if(tables)$
+    \usepackage{longtable,booktabs}
+$endif$
+
+$if(graphics)$
+\usepackage{graphicx}
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+    \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+    \makeatother
+    % Scale images if necessary, so that they will not overflow the page
+    % margins by default, and it is still possible to overwrite the defaults
+    % using explicit options in \includegraphics[width, height, ...]{}
+    \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex,$lang$]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={$author-meta$},
+            pdftitle={$title-meta$},
+            colorlinks=true,
+            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+
+$if(links-as-notes)$
+    % Make links footnotes instead of hotlinks:
+    \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+
+$if(strikeout)$
+    \usepackage[normalem]{ulem}
+    % avoid problems with \sout in headers with hyperref:
+    \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+$if(numbersections)$
+    \setcounter{secnumdepth}{5}
+$else$
+    \setcounter{secnumdepth}{0}
+$endif$
+
+$if(verbatim-in-note)$
+    \VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+
+$if(title)$
+    \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
+$endif$
+
+$if(author)$
+    \author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+
+\date{$date$}
+
+$for(header-includes)$
+    $header-includes$
+$endfor$
+% Suppressing hyphenation across pages
+% See http://tex.stackexchange.com/questions/8558/suppressing-hyphenation-across-pages
+\brokenpenalty=10000
+%\pretolerance=1000
+%\tolerance=2000
+%\emergencystretch=10pt
+\lefthyphenmin=4
+\righthyphenmin=4
+% min extra
+
+\renewcommand{\cftchapterfont}{\normalfont\sffamily}   
+\renewcommand{\cftsectionfont}{\normalfont\sffamily} 
+
+\settrims{0pt}{0pt}% set trims - see page 22
+\setbinding{0pt}% adjust if you need an allowance for binding
+%\setlrmargins{*}{*}{2}% the outer margin twice the width of the inner
+%\setulmargins{*}{*}{2}% lower margin twice the height of the upper
+%\setheadfoot{14pt}{28pt}% header height of 14pt and foot skip of 28pt - page 20
+%\setheaderspaces{*}{*}{.5}% drop the header by twice the distance from the header to the top of the text block
+%\setcolsepandrule{10pt}{0pt}% 10pt between columns in two-column layout, with no vertical rule drawn
+% \fixpdflayout% use this if not using pdfLaTeX
+
+%\fixthelayout 
+\fixpdflayout 
+\renewcommand{\thesubsection}{}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+% ======================== DOCUMENT BEGINSG HERE ===========================0
+\begin{document}
+
+\frontmatter
+
+
+$if(title)$
+\maketitle
+
+$endif$
+\pagebreak
+
+\pagestyle{empty}
+%% copyrightpage
+\begingroup
+\footnotesize
+\parindent 0pt
+\parskip \baselineskip
+\begin{center}
+\Large \textsc{Precious Book Treasury}\\
+\large \textit{providing good old books}\\
+\end{center}
+\vfill
+
+Copyright: $copyright$\\
+Format: $book-format-string$ \\
+Created: $gen-time$ \\
+Printed by: $printed-by$\\
+$if(isbn)$
+    ISBN: $isbn$\\
+$endif$
+$if(original-title)$
+    Original: "$original-title$" by $original-author$\\
+$endif$
+
+\vspace*{2\baselineskip}
+\endgroup
+\clearpage
+
+
+$for(include-before)$
+    $include-before$
+$endfor$
+
+$if(toc)$
+    \pagestyle{simple}
+    {
+        \hypersetup{linkcolor=black}
+        \setcounter{tocdepth}{$toc-depth$}
+        \tableofcontents
+    }
+$endif$
+
+\mainmatter
+
+\copypagestyle{ruled-top-folio}{ruled}
+\makeevenhead{ruled-top-folio}{\scshape\small\normalfont\textsc{\leftmark}}{}{\thepage}
+\makeoddhead{ruled-top-folio}{\thepage}{}{}
+\makeevenfoot{ruled-top-folio}{}{}{}
+\makeoddfoot{ruled-top-folio}{}{}{}
+
+\copypagestyle{ruled-bottom-folio}{ruled}
+\makeevenhead{ruled-bottom-folio}{\scshape\small\normalfont\textsc{\leftmark}}{}{}
+\makeoddhead{ruled-bottom-folio}{}{}{\normalfont\small\textsc{\rightmark}}
+\makeevenfoot{ruled-bottom-folio}{}{\thepage}{}
+\makeoddfoot{ruled-bottom-folio}{}{\thepage}{}
+
+%\copypagestyle{companion-folio}{companion}
+%\makeevenfoot{companion-folio}{}{}{\thepage}
+%\makeoddfoot{companion-folio}{\thepage}{}{}
+
+
+%\pagestyle{companion-folio}
+%\pagestyle{ruled-bottom-folio}
+\pagestyle{ruled-bottom-folio}
+
+\makechapterstyle{dash-big}{%
+  \chapterstyle{dash}
+  \renewcommand*{\chaptitlefont}{\Huge\itshape}
+  }
+\chapterstyle{dash-big}
+
+$body$
+
+
+$if(lot)$
+    \listoftables
+$endif$
+
+$if(lof)$
+    \listoffigures
+$endif$
+
+$if(natbib)$
+    $if(biblio-files)$
+        $if(biblio-title)$
+            $if(book-class)$
+                \renewcommand\bibname{$biblio-title$}
+            $else$
+                \renewcommand\refname{$biblio-title$}
+            $endif$
+
+        $endif$
+        \bibliography{$biblio-files$}
+    $endif$
+$endif$
+
+$if(biblatex)$
+    \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+$endif$
+
+$for(include-after)$
+    $include-after$
+$endfor$
+
+\end{document}

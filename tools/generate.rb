@@ -21,6 +21,7 @@ def getOptions()
     options = {}
     options[:cleanUp] = true
     options[:onlyCover] = false
+    options[:genSmallCover] = false
     optparse = OptionParser.new do|opts|
         opts.banner = "Usage: generate.rb [options]"
     
@@ -30,6 +31,9 @@ def getOptions()
         opts.on('--includeTarget TARGET', 'Only this Target' ) do |x|
             options[:includeTarget] = x
         end
+         opts.on('--includeType TYPE', 'Only this Type' ) do |x|
+            options[:includeType] = x
+        end
         opts.on('--excludeTarget TARGET', 'All but not this target' ) do |x|
             options[:excludeTarget] = x
         end
@@ -38,6 +42,9 @@ def getOptions()
         end
         opts.on('--onlyCover', 'Only Cover' ) do 
             options[:onlyCover] = true
+        end
+        opts.on('--genSmallCover', 'Generate Small Covers' ) do 
+            options[:genSmallCover] = true
         end
     end.parse!
     return options
@@ -58,28 +65,35 @@ def main()
         next if targets == []
         
         targets.each do |name, t|
+            next if($options[:includeType] != nil and t['type'] != $options[:includeType])
             puts "\n\n \e[32mGENERATING\e[0m \e[1m#{name}\e[0m of #{item} \n\n"
             metadata_copy = metadata.merge(t)
             metadata_copy = prepareMetadata(metadata_copy)
             puts t
+           
+                    
             if(t['type'] == "print")
                 if(not $options[:onlyCover])
                     puts "\n\n    \e[33mGENERATING\e[0m  PDF of #{item} \n\n"
-                    generatePandocPDF(item, metadata_copy, t) if targetIncluded? "book"
+                    generatePandocPDF(item, metadata_copy, t) if target_included? "book"
                 end
                 
                 puts "\n\n    \e[33mGENERATING\e[0m  cover config of #{item} \n\n"
-                generateCoverFile(item, metadata_copy, t) if targetIncluded? "cover"
+                generateCoverFile(item, metadata_copy, t) if target_included? "cover"
                 puts "\n\n    \e[33mGENERATING\e[0m  cover of #{item} \n\n"
-                generateCover(item, metadata_copy, t, $home + "/template/cover.html") if targetIncluded? "cover"
+                generateCover(item, metadata_copy, t, $home + "/template/cover.html") if target_included? "cover"
             elsif(t['type'] == "epub")
-                generatePandocEPUB(item, metadata_copy, t) if targetIncluded? "book"
+                generatePandocEPUB(item, metadata_copy, t) if target_included? "book"
+            elsif(t['type'] == "web")
+                next if not target_included? "book"
+                file_name = generatePandocPDF(item, metadata_copy, t)
+                compress_pdf(file_name)
             end
         end
     end
     generateWebsite();
 end
-def targetIncluded?(name)
+def target_included?(name)
     if $options[:includeTarget] != nil
         return $options[:includeTarget] == name
     end

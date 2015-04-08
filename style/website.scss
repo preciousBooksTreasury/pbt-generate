@@ -1,0 +1,40 @@
+@import "compass/css3";
+@import "compass/utilities"; 
+$flagPath : "images/flags/24/";
+#header {
+    background-image: url("images/header.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 20em;
+    padding: 3em;
+    margin-bottom: 1em;
+    text-align:center;
+    h1,h2 {
+        color: #fff;
+         @include text-shadow(rgba(black, 0.7) 1px 1px 4px);
+    }
+}
+
+.items {
+    padding: 2em;
+}
+
+.cover {
+    max-width: 200px;
+    max-height: 210px;
+}
+.flag {
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+}
+.flag-de {
+    background-image: url($flagPath + "Germany.png");
+}
+.flag-en {
+    background-image: url($flagPath + "United Kingdom(Great Britain).png");
+}
+.flag-ru {
+    background-image: url($flagPath + "Russian Federation.png");
+}

@@ -4,7 +4,7 @@ def generatePandocPDF(book, metadata, target)
     metadata['base'] = book
     size = papersizes[metadata['papersize']]
     
-    fileName = genFileName(metadata, target)+ "-print"
+    fileName = genFileName(metadata, target)
     co = ""
     metadata['classoptions'].each do |x|
         co += "-V 'classoption:#{x}' "
@@ -73,13 +73,14 @@ def generatePandocPDF(book, metadata, target)
     else
         puts "failed #{fileName}"
     end
+    return fileName+"."+metadata['fileType']
 end
 
 
 def generatePandocEPUB(book, metadata, target)
     metadata['base'] = book
     
-    fileName = genFileName(metadata, target)+ "-print"
+    fileName = genFileName(metadata, target)
     
     #generate book
     a = "cd '#{book}' && pandoc \

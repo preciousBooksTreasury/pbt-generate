@@ -4,19 +4,24 @@ default:
   - lulu-digest-10pt
   - lulu-a5-10pt
   - epub
+  - web
 booklet:
   - epubli-taschenbuch-booklet-11pt
-  - lulu-digest-booklet-11pt
+  - lulu-a5-booklet-11pt
   - epub
+  - web
   
 booklet-big:
   - epubli-a5-booklet-10pt
   - epub
+  - web
   
 default-big:
   - epubli-taschenbuch-11pt
   - lulu-digest-11pt
   - epub
+  - web
   
 digital:
   - epub
+  - web

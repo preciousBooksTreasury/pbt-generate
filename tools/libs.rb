@@ -1,6 +1,6 @@
 def parseTemplate( templateStr, values )
     templateStr.gsub( /:::(.*?):::/ ) { 
-        if(values.has_key? $1) 
+        if(values.has_key? $1 and values[$1] != nil) 
             values[$1].to_str 
         else 
             "" 
@@ -28,7 +28,9 @@ end
 def genFileName(metadata, target)
     genFolderName(metadata) +'/'+ metadata['latinTitle'] + "-" + target['name']
 end
-
+def genFileNameGlobal(metadata)
+    genFolderName(metadata) +'/'+ metadata['latinTitle']
+end
 def genFolderName(metadata)
     a = metadata['author']
     if metadata.has_key? 'latinAuthor' and metadata['latinAuthor'] != ""
@@ -106,6 +108,7 @@ def getMetaData(book)
     metadata = YAML.load_file(book + "/metadata.yml")
     
     metadata['language'] = getLanguageName(book)
+    metadata['languageCode'] = book.split('/')[-1]
     metadata['gentime'] = Time.now.to_s
     
     targets = getTargets(metadata);
@@ -161,4 +164,22 @@ end
 
 def ok_msg(msg)
     puts "\e[34mOK\e[0m #{msg}"
+end
+
+def compass_compile(scss_file)
+    `#{$compass} compile "#{scss_file}"`
+end
+
+def compress_pdf(file)
+    `gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -sOutputFile="#{file}.comp.pdf" "#{file}"`
+end
+def languageToFlag(lang)
+    if(lang == "german")
+        return "Germany"
+    elsif lang == "english"
+        return "United Kingdom(Great Britain)"
+    elsif lang == "russian"
+        return "Russian Federation"
+    end
+    return ""
 end

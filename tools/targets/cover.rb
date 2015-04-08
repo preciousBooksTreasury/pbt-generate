@@ -15,7 +15,7 @@ def generateCover(book, metadata, target, template)
         metadata['css'] =  css_file_global
     end
     return if metadata['img'] == {}
-    metadata['img'] = $home +"/cover/" +  metadata['img'];
+    metadata['img'] = $home +"/cover/" + metadata['img'];
     metadata['base'] = book
     
     if(target.has_key? 'isbn')
@@ -38,13 +38,33 @@ def generateCover(book, metadata, target, template)
     
 end
 
+def generateCoverSmall(metadata, result)
+     if(not metadata.has_key? 'img')
+        return
+    end
+    
+    return if metadata['img'] == {}
+    metadata['img'] = $home +"/cover/" + metadata['img'];
+    metadata['css'] = "#{$home}/style/cover-small.css"
+    
+    tmpl = IO.read("#{$home}/template/cover-small.html") # read template file
+    out = parseTemplate(tmpl, metadata) # apply metdata variables
+    f = genFileNameGlobal(metadata) + "-cover-small" # new filename
+    
+    #write html
+    aFile = File.new(f+".html", "w")
+    aFile.syswrite(out)
+    #generate book
+    system("wkhtmltoimage --crop-h 210 --crop-w 148 \"#{f}.html\" \"#{result}\"")
+end
+    
 def getPDFPagecount(file)
     ret = `pdfinfo "#{file}" | grep ^Pages:`.strip
     ret.split(':')[1].strip
 end
 
 def generateCoverFile(book, metadata, target)
-    pdf_file = genFileName(metadata, target)+"-print.pdf"
+    pdf_file = genFileName(metadata, target)+"."+metadata['fileType']
     pagecount = getPDFPagecount(pdf_file)
     if(target['printerName'] == "epubli") 
         size = getEpubliSize(target['papersize'], target['binding'], pagecount)
@@ -53,8 +73,10 @@ def generateCoverFile(book, metadata, target)
     else
         return
     end
-    css_file = genFileName(metadata, target)+"-cover.scss"
-    File.write(css_file, 
+    
+    # big cover file
+    scss_file = genFileName(metadata, target)+"-cover.scss"
+    File.write(scss_file, 
 "@import 'style/_tools.scss';
 @import 'style/_coverConfig.scss';
 $width: #{size[0]};
@@ -64,6 +86,5 @@ $begin: #{size[3]};
 $padding: #{size[4]};
 @import 'style/_cover.scss';")
     
-    #compile
-    `#{$compass} compile "#{css_file}"`
+    compass_compile(scss_file)
 end

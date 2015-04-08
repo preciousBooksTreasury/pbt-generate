@@ -59,10 +59,10 @@ lulu-digest-11pt:
     binding: Softcover
     printerName: lulu
 
-lulu-digest-booklet-11pt:
+lulu-a5-booklet-11pt:
     type: print
-    format: digest-11pt
-    papersize: digest
+    format: booklet-a5-11pt
+    papersize: a5
     fontsize: 11pt
     print: www.lulu.com
     cover: cover-digest-lulu.css
@@ -94,8 +94,17 @@ lulu-a5-10pt:
     fileType: pdf
     binding: Softcover
     printerName: lulu
-
+    
+web:
+    webCaption: PDF
+    type: web
+    format: web
+    papersize: a5
+    fontsize: 10pt
+    pandocTemplate: web.latex
+    fileType: pdf
 epub:
+    webCaption: EPub
     type: epub
     format: epub
     pandocTemplate: default.epub

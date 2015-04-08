@@ -1,16 +1,24 @@
-<div class="panel panel-default">
+<div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">:::title:::</h3>
+    <div class="pull-right panel-title">:::originalTitle::: (:::originalAuthor:::) <span class="flag flag-:::flag:::"></span></div> <h3 class="panel-title">:::title:::</h3>
   </div>
   <div class="panel-body">
-     <dt>Author</dt>
-      <dd>:::author:::</dd>
+    <div class="row">
+        <div class="col-md-2"> 
+            <div class="thumbnail">
+                <img class="cover" src=":::img:::" /> 
+            </div>
+        </div>
+        <div class="col-md-10"> 
+            <dt>Author</dt>
+            <dd>:::author:::</dd>
       
-      <dt>Download</dt>
-      <dd>:::download:::</dd>
+            <dt>Download</dt>
+            <dd><ul>:::download:::</ul></dd>
       
-      <dt>Kaufen</dt>
-      <dd>:::buy_items:::</dd>
-      
+            <dt>Kaufen</dt>
+            <dd>:::buy_items:::</dd>
+        </div>
+    </div>
   </div>
 </div>
