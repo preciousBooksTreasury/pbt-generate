@@ -6,13 +6,25 @@ $flagPath : "images/flags/24/";
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    
     height: 20em;
-    padding: 3em;
     margin-bottom: 1em;
-    text-align:center;
+    
+    .header-overlay {
+        padding: 3em;
+        text-align:center;
+        background-color: rgba(0,0,0,0.3);
+        height: 20em;
+        
+    }
+  
+    
     h1,h2 {
         color: #fff;
          @include text-shadow(rgba(black, 0.7) 1px 1px 4px);
+    }
+    h1 {
+        font-size: 52px;
     }
 }
 

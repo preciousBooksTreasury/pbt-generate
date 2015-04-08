@@ -52,6 +52,12 @@ items:
       link: http://www.lulu.com/shop/ch-spurgeon/ratschl%C3%A4ge-f%C3%BCr-seelengewinner/paperback/product-22117882.html
  -
   path: books/public/A.W. Tozer/The Knowlegde of the Holy/ru
+  buy:
+    lulu:
+        site: lulu.com
+        name: Paperback
+        price: 3,65 €
+        link: http://www.lulu.com/content/paperback-buch/%D0%92%D0%B5%D0%BB%D0%B8%D1%87%D0%B8%D0%B5-%D0%91%D0%BE%D0%B3%D0%B0/16589144
  -
   path: books/public/A.W. Tozer/The Pursuit of God/ru
  -
@@ -66,12 +72,24 @@ items:
   path: books/public/Amy Carmichael/Things As They Are/en/
  -
   path: books/public/C.H. Spurgeon/Sermons On Prayer/ru/
+  buy:
+    lulu:
+        site: lulu.com
+        name: Paperback
+        price: 5,56 €
+        link: http://www.lulu.com/shop/%D1%87%D0%B3-%D1%81%D0%BF%D0%B5%D1%80%D0%B4%D0%B6%D0%B5%D0%BD%D0%B0/%D1%81%D1%82%D1%83%D1%87%D0%B8%D1%82%D0%B5/paperback/product-22120557.html
  -
   path: books/public/C.H. Spurgeon/Student Lectures/de/
  -
   path: books/public/C.H. Spurgeon/Student Lectures/ru/
  -
-  path: books/public/Ernst Modersohn/Im Banne des Teufels/ru/
+    path: books/public/Ernst Modersohn/Im Banne des Teufels/ru/
+    buy:
+      lulu:
+        site: lulu.com
+        name: Paperback
+        price: 3,15 €
+        link: http://www.lulu.com/shop/%D1%8D%D1%80%D0%BD%D1%81%D1%82-%D0%BC%D0%BE%D0%B4%D0%B5%D1%80%D0%B7%D0%BE%D0%BD/%D0%B2-%D0%BE%D0%BA%D0%BE%D0%B2%D0%B0%D1%85-%D1%81%D0%B0%D1%82%D0%B0%D0%BD%D1%8B/paperback/product-22120540.html
  -
   path: books/public/J.C. Ryle/Do you Pray/de/
  -

@@ -23,14 +23,26 @@
     
     <div class="container-fluid">
         <div class="row">
-            <div class="span-12">
+            <div class="col-md-12">
                 <div id="header" class="page-header">
-                    <h1> Precious Books Treasury <small>providing good old books</small></h1>
+                    <div class="header-overlay">
+                        <h1> Precious Books Treasury</h1>
+                        <h2>providing good old books</h2>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="span-12">
+            <div class="col-md-12">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button autofocus="true" type="button" class="btn btn-default button-lang-select" data-lang="de"><span class="flag flag-de"></span></button>
+                    <button autofocus="true" type="button" class="btn btn-default button-lang-select" data-lang="en"><span class="flag flag-en"></span></button>
+                    <button autofocus="true" type="button" class="btn btn-default button-lang-select" data-lang="ru"><span class="flag flag-ru"></span></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="items">
                     :::items:::
                 </div>
@@ -41,5 +53,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        var langs = ['de','en','ru']
+        
+        $('.button-lang-select').click( function() {
+            $('.button-lang-select').each(function() {
+                $(this).addClass('btn-default').removeClass('btn-primary');
+            });
+            
+            var button = $(this);
+            var lang = button.data('lang');
+            button.addClass('btn-primary').removeClass('btn-default');
+            console.log(lang);
+            $.each(langs, function( index, value ) {
+                if(value != lang) {
+                    $('.lang-'+value).hide();
+                }   
+            });
+            $('.lang-'+lang).show();
+            window.location.hash = lang;
+        });
+        $(document).ready(function() {
+            var lang = window.location.hash;
+            if(lang == "" || lang=="#") return;
+            lang = lang.split('#')[1]
+            console.log(lang);
+            $.each(langs, function( index, value ) {
+                if(value != lang) {
+                    $('.lang-'+value).hide();
+                }   
+            });
+            $('.lang-'+lang).show();
+        });
+        
+    </script>
   </body>
 </html> 

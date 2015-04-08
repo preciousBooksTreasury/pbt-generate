@@ -22,6 +22,8 @@ def generateWebsite()
             buy_html = buy_html + 
                 parseTemplate(IO.read("#{$home}/template/website.buyitem.html"), buy)
         end
+    else
+        buy_html = "Derzeit noch nicht verfügbar."
     end
     
     download_html = ""
@@ -60,7 +62,7 @@ def generateWebsite()
     img = "#{$outputPath}/website/cover/"+bookConfig['latinTitle'] + ".jpg"
     generateCoverSmall(bookConfig, "#{$outputPath}/website/cover/"+bookConfig['latinTitle'] + ".jpg") if($options[:genSmallCover])
     item_data["img"] ="cover/"+bookConfig['latinTitle'] + ".jpg"
-    item_data["flag"] = bookConfig['languageCode']
+    item_data["lang"] = bookConfig['languageCode']
 
     item = parseTemplate(IO.read("#{$home}/template/website.item.html"), item_data)
     
