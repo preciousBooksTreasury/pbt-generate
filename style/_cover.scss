@@ -23,13 +23,15 @@ html {
 .container {
     width: $width;
 }
-#back {
+
+td#back {
     width: $back;
     max-width: $back;
     height: $height;
 }
+
 @if $back < mm-to-px(5)  {
-    #back {
+    td#back {
         vertical-align: middle;
     }
     .stripe_back {
@@ -41,7 +43,8 @@ html {
     }
    
 } @else {
-    #back {
+    /* this is in the table */
+    td#back {
         background-color: rgba(0,0,0,0.8);
     }
     $font-size:  $back*0.4;
@@ -51,7 +54,7 @@ html {
     } @else {
         $font-size:  $back*0.4;
     }
-    
+    /* this is a overlay */
     #back-text {
         position: absolute;
         top:0;

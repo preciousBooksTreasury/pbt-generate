@@ -14,9 +14,7 @@ a5:
 taschenbuch: 
     width: 125mm
     height: 190mm
-    top: 2cm
-    left: 1.7cm
-    geometryoptions: hmarginratio=8:10,vmarginratio=2:3,ignoreall,twoside
+    geometryoptions: ignoreall,twoside
 digest: 
     width: 140mm
     height: 216mm
