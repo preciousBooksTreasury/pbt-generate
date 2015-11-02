@@ -5,13 +5,13 @@ require 'optparse'
 require 'yaml'
 #require 'i18n'
 require_relative 'libs.rb'
-require_relative 'targets/book.rb'
 require_relative 'targets/pandocBook.rb'
 require_relative 'targets/cover.rb'
 require_relative 'targets/epub.rb'
 require_relative 'generateWebsite.rb'
 
 $home = "/home/paul/Cloud/Bibliothek/PreciousBooksTreasury"
+$cover = "/run/media/paul/Transcend/PreciousBooksTreasury/cover"
 $outputPath = $home+"/results"
 $ru = Hash["l-toc" =>"Оглавление"]
 $de = Hash["l-toc" => "Inhaltsverzeichnis"]
@@ -55,14 +55,13 @@ def main()
     compassCompile();
     #generate all
     $options = getOptions()
-    Dir.glob($home + "/**/*").each do |item| # scan all folders
+    Dir.glob($home + "/books/**/*").each do |item| # scan all folders
         next if item == '.' or item == '..' # skip
-        next if(not File.directory? item) # skip files
-        next if(not File.exists?(item + "/metadata.yml"))
+        next if not item.end_with? '.markdown'
         next if $options[:includePath] != nil and (not item.include? $options[:includePath])
         puts item
         metadata, targets = getMetaData(item)
-        next if targets == []
+        next if targets == [] or metadata == nil
         
         targets.each do |name, t|
             next if($options[:includeType] != nil and t['type'] != $options[:includeType])

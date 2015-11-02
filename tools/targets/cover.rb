@@ -4,19 +4,19 @@ def generateCover(book, metadata, target, template)
     if(not metadata.has_key? 'img')
         return
     end
-    
+    dir = File.dirname(book)
     # set metadata variables
     css_file_local = genFileName(metadata, target)+"-cover.css"
-    css_file_global = book + '/'+metadata['cover']
+    css_file_global = dir + '/'+metadata['cover']
     if(File.exists? css_file_local)
         metadata['css'] =  css_file_local
     end
     if(File.exists? css_file_global)
         metadata['css'] =  css_file_global
     end
-    return if metadata['img'] == {}
-    metadata['img'] = $home +"/cover/" + metadata['img'];
-    metadata['base'] = book
+    return if metadata['img'] == {} or metadata['img'] == nil
+    metadata['img'] = $cover + '/'+ metadata['img'];
+    metadata['base'] = dir
     
     if(target.has_key? 'isbn')
         info_msg "has isbn #{target['isbn']}"
@@ -34,7 +34,7 @@ def generateCover(book, metadata, target, template)
     
     #generate book
     puts "filename ===="  + f
-    system("wkhtmltoimage \"#{f}.html\" \"#{f}.jpg\"")
+    system("wkhtmltoimage --enable-javascript --javascript-delay 100 \"#{f}.html\" \"#{f}.jpg\"")
     
 end
 
@@ -44,7 +44,7 @@ def generateCoverSmall(metadata, result)
     end
     
     return if metadata['img'] == {}
-    metadata['img'] = $home +"/cover/" + metadata['img'];
+    metadata['img'] = $cover + '/' + metadata['img'];
     metadata['css'] = "#{$home}/style/cover-small.css"
     
     tmpl = IO.read("#{$home}/template/cover-small.html") # read template file
@@ -64,6 +64,9 @@ def getPDFPagecount(file)
 end
 
 def generateCoverFile(book, metadata, target)
+   if(not metadata.has_key? 'img')
+        return
+    end
     pdf_file = genFileName(metadata, target)+"."+metadata['fileType']
     pagecount = getPDFPagecount(pdf_file)
     if(target['printerName'] == "epubli") 

@@ -54,6 +54,9 @@ td#back {
     } @else {
         $font-size:  $back*0.4;
     }
+    @if $font-size > 80px {
+        $font-size:  80px
+    } 
     /* this is a overlay */
     #back-text {
         position: absolute;
@@ -117,6 +120,8 @@ td#back {
     color: #ffffff;
     white-space: pre;
     text-align: center;
+    max-width: $width - $back - $begin;
+    width: $width - $back;
 }
 
 #author {
@@ -124,6 +129,8 @@ td#back {
     font-size: $authorFontSize;
     color: #ffffff;
     text-align: center;
+    max-width: $width - $back - $begin;
+    width: $width - $back;
 }
 
 #page-background {

@@ -51,7 +51,7 @@ end
 
 
 def getLanguageName(book)
-    a = book.split('/')[-1]
+    a = book.split('.')[-1]
     if a == "en"
         return "english"
     elsif a == "de"
@@ -105,8 +105,21 @@ def getTargets(metadata)
 end
 
 def getMetaData(book)
-    metadata = YAML.load_file(book + "/metadata.yml")
-    
+    begin
+      metadata = YAML.load_file(book)
+    rescue
+      return nil, nil
+    end
+    if(not metadata.has_key? 'license')
+      metadata['license'] = 'Gemeinfrei/Public Domain'
+    end
+    if(not metadata.has_key? 'latinTitle')
+      metadata['latinTitle'] = metadata['title'] # TODO:
+    end
+    if(not metadata.has_key? 'target-sets')
+      metadata['target-sets'] = ['default']
+    end
+
     metadata['language'] = getLanguageName(book)
     metadata['languageCode'] = book.split('/')[-1]
     metadata['gentime'] = Time.now.to_s
@@ -136,16 +149,6 @@ end
 
 def prepareUniverse()
     Dir.mkdir $outputPath if not Dir.exists? $outputPath
-end
-
-def readAllBooks(book)
-    data = IO.read("#{book}/data.html")
-    i = 1
-    while File.exists?("#{book}/data#{i}.html")
-        data += IO.read("#{book}/data#{i}.html")
-        i += 1
-    end
-    return data
 end
 
 def sanitizeBash(string)

@@ -1,8 +1,7 @@
 ---
 default:
   - epubli-taschenbuch-10pt
-  - lulu-digest-10pt
-  - lulu-a5-10pt
+  - wirmachendruck-a5-hard-11pt
   - epub
   - web
 booklet:

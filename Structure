@@ -6,10 +6,7 @@ Author:
     
 Books:
 
-/[Author]/[Book Title]/[Language]/
-    data.html - the book itself
-    metadata.xml
-    data.css - special css; only if needed
+/[Author]/[Book Title]/[Book Title].markdown
     
 /style/
     print.css

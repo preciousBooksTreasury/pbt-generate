@@ -95,6 +95,19 @@ lulu-a5-10pt:
     binding: Softcover
     printerName: lulu
     
+    
+wirmachendruck-a5-hard-11pt:
+    type: print
+    format: a5-11pt
+    papersize: a5
+    fontsize: 11pt
+    print: www.wir-machen-druck.de
+    cover: cover-a5-hard-wirmachendruck.css
+    pandocTemplate: book.latex
+    fileType: pdf
+    binding: Hardcover
+    printerName: wirmachendruck
+    
 web:
     webCaption: PDF
     type: web

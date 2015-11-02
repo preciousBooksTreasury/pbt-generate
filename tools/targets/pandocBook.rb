@@ -40,7 +40,7 @@ def generatePandocPDF(book, metadata, target)
     #        -V 'mainfont:Times New Roman' \
 
     #generate book
-    a = "cd '#{book}' && pandoc \
+    a = "cd '#{File.dirname(book)}' && pandoc \
         #{size_param} \
         -V 'geometry:#{geometry}' \
         -V 'fontsize:#{metadata['fontsize']}' \
@@ -64,7 +64,7 @@ def generatePandocPDF(book, metadata, target)
         --template='#{$home}/pandoc/#{metadata['pandocTemplate']}' \
         --toc \
         --latex-engine=xelatex \
-        -s '#{book}/data.markdown' \
+        -s '#{book}' \
         -o '#{fileName}.#{metadata['fileType']}'"
     puts a.squeeze(' ')
     system(a)
@@ -83,7 +83,7 @@ def generatePandocEPUB(book, metadata, target)
     fileName = genFileName(metadata, target)
     
     #generate book
-    a = "cd '#{book}' && pandoc \
+    a = "cd '#{File.dirname(book)}' && pandoc \
         -V 'author:#{sanitizeBash(metadata['author'])}' \
         -V 'title:#{sanitizeBash(metadata['title'])})' \
         -V 'subtitle:#{sanitizeBash(metadata['subtitle'])}' \
@@ -97,7 +97,7 @@ def generatePandocEPUB(book, metadata, target)
         -V 'lang:#{metadata['language']}' \
         --template='#{$home}/pandoc/#{metadata['pandocTemplate']}' \
         --toc \
-        -s '#{book}/data.markdown' \
+        -s '#{book}' \
         -o '#{fileName}.#{metadata['fileType']}'"
     puts a
     system(a)
