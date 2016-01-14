@@ -99,7 +99,7 @@ lulu-a5-10pt:
 wirmachendruck-a5-hard-11pt:
     type: print
     format: a5-11pt
-    papersize: a5
+    papersize: a5-wir
     fontsize: 11pt
     print: www.wir-machen-druck.de
     cover: cover-a5-hard-wirmachendruck.css
@@ -107,6 +107,7 @@ wirmachendruck-a5-hard-11pt:
     fileType: pdf
     binding: Hardcover
     printerName: wirmachendruck
+    coverOutputType: pdf
     
 web:
     webCaption: PDF

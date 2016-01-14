@@ -1,0 +1,9 @@
+$front-height-top: $height * 0.15;
+$front-height-middle: $height * 0.7;
+$front-height-bottom: $height * 0.15;
+$background-color2: lighten(desaturate($background-color, 5%), 10%);
+
+$back-height-top: $height * 0.15;
+$back-height-middle: $height * 0.7;
+$back-height-bottom: $height * 0.15;
+

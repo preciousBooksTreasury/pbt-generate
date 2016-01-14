@@ -34,10 +34,22 @@ def generateCover(book, metadata, target, template)
     
     #generate book
     puts "filename ===="  + f
-    system("wkhtmltoimage --enable-javascript --javascript-delay 100 \"#{f}.html\" \"#{f}.jpg\"")
+    if(metadata['coverOutputType'] == 'jpg')
+      system("wkhtmltoimage \"#{f}.html\" \"#{f}.jpg\"")
+    else
+      system("wkhtmltoimage \"#{f}.html\" \"#{f}.jpg\" && convert -units PixelsPerInch -density 300x300 \"#{f}.jpg\" \"#{f}.pdf\"")
+      crop(f, 15, 10)
+    end 
     
 end
-
+def crop(image, top, left)
+  t = (300/25.4)*top
+  l = (300/25.4)*left
+  puts "crop +#{l}+#{t}"
+  system("convert -crop +#{l}+#{t} \"#{image}.jpg\" \"#{image}.1.jpg\"")
+  system("convert -crop -#{l}-#{t} \"#{image}.1.jpg\" \"#{image}.cropped.jpg\"")
+end
+        
 def generateCoverSmall(metadata, result)
      if(not metadata.has_key? 'img')
         return
@@ -76,7 +88,7 @@ def generateCoverFile(book, metadata, target)
     else
         return
     end
-    
+    puts metadata
     # big cover file
     scss_file = genFileName(metadata, target)+"-cover.scss"
     File.write(scss_file, 
@@ -87,6 +99,10 @@ $height: #{size[1]};
 $back: #{size[2]};
 $begin: #{size[3]};
 $padding: #{size[4]};
+$backgrund-color: ##{metadata['coverBackgroundColor']};
+$margin-rightleft: mm-to-px(3);
+$margin-topbottom: mm-to-px(3);
+@import 'style/_coverConfigGenerate.scss';
 @import 'style/_cover.scss';")
     
     compass_compile(scss_file)

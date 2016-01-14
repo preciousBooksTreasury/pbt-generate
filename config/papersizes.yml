@@ -11,6 +11,14 @@ a5:
     bottom: 2cm
     left: 2.5cm
     right: 2cm
+a5-wir: 
+    width: 154mm
+    height: 216mm
+    top: 2.2cm
+    bottom: 2.2cm
+    left: 2.6cm
+    right: 2.2cm
+    
 taschenbuch: 
     width: 125mm
     height: 190mm

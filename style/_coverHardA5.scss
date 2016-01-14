@@ -1,0 +1,21 @@
+@import 'style/_tools.scss';
+
+/** some fixed values*/
+$cover-data-width: mm-to-px(336) + $back;
+$cover-data-height: mm-to-px(245);
+
+$cover-result-width: mm-to-px(306) + $back;
+$cover-result-height: mm-to-px(215);
+
+$a5-result-width: mm-to-px(148);
+$a5-result-height: mm-to-px(210);
+
+
+/* some genration of values*/
+$margin-rightleft: ($cover-data-width - $cover-result-width) / 2;
+$margin-topbottom: ($cover-data-height - $cover-result-height) / 2;
+
+$width: $cover-data-width;
+$height: $cover-data-height;
+
+$begin:  $margin-rightleft + ($cover-result-width - ($a5-result-width*2 + $back))/2 + $a5-result-width;

@@ -2,49 +2,49 @@
  <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href=":::css:::">
-<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,500,700italic,300&subset=latin,cyrillic,greek,cyrillic-ext,latin-ext' 
-rel='stylesheet' type='text/css'>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.js"></script>
         <base href=":::base:::" target="_blank" />
-        
-        <script>
-          $( document ).ready(function() {
-            /*jQuery("#title").fitText();
-            jQuery("#author").fitText();
-            jQuery(".stripe_back").fitText();*/
-          });
-        </script>
     </head>
     <body>
         :::isbn-pic:::
-        <div id="bg" style="background-image:url(':::img:::');">
-            <div id="back-text">
+        
+        <div class="bg" style="background-image:url(':::img:::');">
+          <div id="back-text">
                 <div class="title"> :::title::: </div>   
                 <div class="author"> :::author::: </div>   
             </div>
-            <table class="container">
-                <tr>
-                    <td id="page-back">
-                        <div id="cover_pre">:::cover_pre:::</div>
-                        <div class="stripe">
-                            <div id="cover_stripe">:::cover_stripe:::</div>
-                        </div>
-                        <div id="cover_after">:::cover_after:::</div>
-                    </td>
-                    <td id="back" valign="bottom">
-                        <div class="stripe_back">
-                        </div>
-                    </td>
+          <table class="container">
+              <tr>
+                <td id="page-back">
+                  <div id="back-top">
+                  </div>
+                  <div id="back-middle">
+                    <div id="summary">:::summary:::</div>
+                  </div>
+                  <div id="back-bottom">
+                    <div id="info">
+                      <div id="logo"></div>
+                    </div>
+                  </div> 
+                </td>
+                
+                <td id="back" valign="bottom">
+                
+                </td>
+                
+                <td id="page-front">
+                  <div id="front-top">
                     
-                    <td id="page-front">
-                        <div class="stripe">
-                            <div id="title"> :::title::: </div>
-                            <div id="author"> :::author::: </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                  </div>
+                  <div id="front-middle">
+                    <div id="title"> :::title::: </div>
+                  </div>
+                  <div id="front-bottom">
+                    <div id="author"> :::author::: </div>
+                  </div>
+                </td>
+              </tr>
+          </table>
         </div>
+        
     </body>
 </html>

@@ -119,6 +119,11 @@ def getMetaData(book)
     if(not metadata.has_key? 'target-sets')
       metadata['target-sets'] = ['default']
     end
+    
+    if(not metadata.has_key? 'coverOutputType')
+      metadata['coverOutputType'] = 'jpg'
+    end
+    
 
     metadata['language'] = getLanguageName(book)
     metadata['languageCode'] = book.split('/')[-1]
